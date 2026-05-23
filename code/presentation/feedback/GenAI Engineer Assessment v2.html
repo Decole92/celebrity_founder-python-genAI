@@ -1,0 +1,1946 @@
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  .hero {
+    background: #8b0000;
+    background: linear-gradient(135deg, #c0392b 0%, #7b0000 100%);
+    border-radius: var(--border-radius-lg);
+    padding: 2.5rem 2rem 2rem;
+    margin-bottom: 1.5rem;
+    color: #fff;
+  }
+  .hero-top {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .nn-logo {
+    width: 52px;
+    height: 52px;
+    background: #fff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+    color: #c0392b;
+    flex-shrink: 0;
+  }
+  .hero h1 {
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: #fff;
+  }
+  .hero h1 span {
+    opacity: 0.75;
+    font-weight: 400;
+  }
+  .hero-desc {
+    font-size: 13px;
+    opacity: 0.85;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+  .hero-pills {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .pill {
+    background: rgba(255, 255, 255, 0.15);
+    border: 0.5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 12px;
+    color: #fff;
+  }
+  .nav-tabs {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+  .nav-tab {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    border: 0.5px solid var(--color-border-tertiary);
+    background: var(--color-background-primary);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+  }
+  .nav-tab.active {
+    background: #c0392b;
+    color: #fff;
+    border-color: #c0392b;
+  }
+  .section {
+    display: none;
+  }
+  .section.active {
+    display: block;
+  }
+  .card {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  .card-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .badge {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 400;
+  }
+  .badge-red {
+    background: #fef0f0;
+    color: #a32d2d;
+    border: 0.5px solid #f09595;
+  }
+  .badge-blue {
+    background: #e6f1fb;
+    color: #185fa5;
+    border: 0.5px solid #85b7eb;
+  }
+  .badge-green {
+    background: #eaf3de;
+    color: #3b6d11;
+    border: 0.5px solid #97c459;
+  }
+  .badge-amber {
+    background: #faeeda;
+    color: #854f0b;
+    border: 0.5px solid #ef9f27;
+  }
+  .badge-purple {
+    background: #eeedfe;
+    color: #534ab7;
+    border: 0.5px solid #afa9ec;
+  }
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px;
+    margin-bottom: 1rem;
+  }
+  .meta-item {
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius-md);
+    padding: 0.75rem;
+    text-align: center;
+  }
+  .meta-label {
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    margin-bottom: 4px;
+  }
+  .meta-value {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+  }
+
+  /* ── Terminal window ── */
+  .terminal {
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+    border: 1px solid #2d2d2d;
+  }
+  .terminal-bar {
+    background: #2a2a2a;
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .t-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+  .t-red {
+    background: #ff5f57;
+  }
+  .t-amber {
+    background: #ffbd2e;
+  }
+  .t-green {
+    background: #28c840;
+  }
+  .t-title {
+    font-size: 12px;
+    color: #888;
+    margin-left: 6px;
+    font-family: var(--font-mono);
+  }
+  .t-lang {
+    font-size: 11px;
+    color: #666;
+    margin-left: auto;
+  }
+  .terminal-body {
+    background: #1a1a2e;
+    padding: 0;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: #e0e0e0;
+    line-height: 1.75;
+    overflow-x: auto;
+  }
+  .t-line {
+    display: flex;
+    min-height: 21px;
+  }
+  .t-num {
+    color: #444;
+    min-width: 36px;
+    text-align: right;
+    padding: 0 12px 0 0;
+    user-select: none;
+    flex-shrink: 0;
+    border-right: 1px solid #2a2a2a;
+    margin-right: 12px;
+  }
+  .t-code {
+    flex: 1;
+    white-space: pre;
+    padding-right: 12px;
+  }
+  .t-line:hover {
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  /* Console output (no line numbers, green text) */
+  .console-bar {
+    background: #1a2a1a;
+  }
+  .console-body {
+    background: #0d1a0d;
+    padding: 0;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.75;
+    overflow-x: auto;
+  }
+  .c-line {
+    display: flex;
+    min-height: 21px;
+    padding: 0 14px;
+  }
+  .c-green {
+    color: #3fb950;
+  }
+  .c-blue {
+    color: #58a6ff;
+  }
+  .c-muted {
+    color: #4a6a4a;
+  }
+  .c-pass {
+    color: #28c840;
+  }
+  .c-warn {
+    color: #d29922;
+  }
+  .c-red {
+    color: #f85149;
+  }
+
+  /* syntax */
+  .kw {
+    color: #c792ea;
+  }
+  .fn {
+    color: #82aaff;
+  }
+  .st {
+    color: #c3e88d;
+  }
+  .cm {
+    color: #546e7a;
+    font-style: italic;
+  }
+  .num {
+    color: #f78c6c;
+  }
+  .op {
+    color: #89ddff;
+  }
+  .dt {
+    color: #ffcb6b;
+  }
+
+  .check-list {
+    list-style: none;
+  }
+  .check-list li {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    padding: 3px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .check-list li::before {
+    content: "✓";
+    color: #3b6d11;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+  .pipeline {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+  }
+  .pipe-box {
+    background: var(--color-background-secondary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-md);
+    padding: 6px 12px;
+    font-size: 12px;
+    color: var(--color-text-primary);
+    white-space: nowrap;
+  }
+  .pipe-box.red {
+    background: #fef0f0;
+    border-color: #f09595;
+    color: #a32d2d;
+  }
+  .pipe-box.green {
+    background: #eaf3de;
+    border-color: #97c459;
+    color: #3b6d11;
+  }
+  .pipe-arrow {
+    color: var(--color-text-tertiary);
+    font-size: 16px;
+  }
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .test-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .test-item {
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius-md);
+    padding: 0.6rem 0.75rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .test-name {
+    font-size: 12px;
+    font-family: var(--font-mono);
+    color: var(--color-text-primary);
+  }
+  .test-desc {
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    margin-top: 2px;
+  }
+  .test-badge {
+    font-size: 10px;
+    padding: 1px 7px;
+    border-radius: 8px;
+    white-space: nowrap;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+  .arch-flow {
+    background: #0d1117;
+    border-radius: var(--border-radius-md);
+    padding: 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 2;
+  }
+  .a-yellow {
+    color: #f9c74f;
+  }
+  .a-green {
+    color: #90be6d;
+  }
+  .a-blue {
+    color: #4895ef;
+  }
+  .a-pink {
+    color: #f72585;
+  }
+  .a-white {
+    color: #e0e0e0;
+  }
+  .arch-arrow {
+    color: #555;
+  }
+  .arch-box {
+    display: inline-block;
+    border: 1px solid;
+    padding: 1px 8px;
+    border-radius: 3px;
+  }
+  .bonus-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .feedback-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .feedback-card {
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius-md);
+    padding: 1rem;
+    text-align: center;
+  }
+  .fb-label {
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+  .fb-value {
+    font-size: 22px;
+    font-weight: 500;
+    color: #c0392b;
+  }
+  .fb-sub {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+  .stack-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+  }
+  .stack-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #c0392b;
+    flex-shrink: 0;
+  }
+  .warn-card {
+    background: #faeeda;
+    border: 0.5px solid #ef9f27;
+    border-radius: var(--border-radius-md);
+    padding: 0.75rem 1rem;
+    font-size: 13px;
+    color: #854f0b;
+    margin-top: 0.75rem;
+  }
+
+  /* Prerequisites */
+  .prereq-dark {
+    background: #151c28;
+    border-radius: var(--border-radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .prereq-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.25rem;
+  }
+  .prereq-icon {
+    width: 40px;
+    height: 40px;
+    background: #1e2a3e;
+    border-radius: var(--border-radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .prereq-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: #e0e0e0;
+  }
+  .prereq-sub {
+    font-size: 12px;
+    color: #3fb950;
+    margin-top: 2px;
+  }
+  .prereq-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 1.25rem;
+  }
+  .prereq-card {
+    background: #1e2a3e;
+    border-radius: var(--border-radius-md);
+    padding: 1rem;
+    text-align: center;
+    border: 0.5px solid #2a3a52;
+  }
+  .prereq-card-icon {
+    font-size: 22px;
+    margin-bottom: 0.5rem;
+  }
+  .prereq-card-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: #e0e0e0;
+    margin-bottom: 2px;
+  }
+  .prereq-card-sub {
+    font-size: 11px;
+    color: #7a8a9a;
+    margin-bottom: 0.5rem;
+  }
+  .prereq-ready {
+    font-size: 12px;
+    color: #3fb950;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+  .sr-only {
+    padding: 15px;
+  }
+  .prereq-pip {
+    background: #111827;
+    border-radius: var(--border-radius-md);
+    padding: 1rem;
+    border: 0.5px solid #2a3a52;
+  }
+  .pip-label {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 0.75rem;
+    font-family: var(--font-mono);
+  }
+  .pip-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 0.75rem;
+  }
+  .pip-tag {
+    background: #1e2a3e;
+    border: 0.5px solid #3fb950;
+    color: #3fb950;
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-family: var(--font-mono);
+  }
+  .pip-cmd {
+    background: #0d1117;
+    border-radius: 6px;
+    padding: 0.6rem 0.9rem;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: #58a6ff;
+  }
+  .pip-cmd span {
+    color: #888;
+  }
+
+  @media (max-width: 520px) {
+    .two-col,
+    .bonus-grid,
+    .test-grid,
+    .feedback-grid,
+    .prereq-cards {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 420px) {
+    .prereq-cards {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>
+
+<h2 class="sr-only">
+  Nationale-Nederlanden GenAI Engineer Assessment — interactive presentation
+</h2>
+
+<div class="hero">
+  <div class="hero-top">
+    <div class="nn-logo">NN</div>
+    <h1>GenAI Engineer<br /><span>Technical Assessment</span></h1>
+  </div>
+  <p class="hero-desc">
+    A full-stack GenAI pipeline covering API integration, data transformation,
+    testing, LLM identification, and agentic workflows — built with Python,
+    Ollama, LangChain & LangGraph.
+  </p>
+  <div class="hero-pills">
+    <span class="pill">5 Exercises</span>
+    <span class="pill">Python + LangChain</span>
+    <span class="pill">~90 Minutes</span>
+    <span class="pill">10 Tests Passing</span>
+  </div>
+</div>
+
+<div class="nav-tabs">
+  <div class="nav-tab active" onclick="show('prereq', this)">Prerequisites</div>
+  <div class="nav-tab" onclick="show('ex1', this)">Exercise 1</div>
+  <div class="nav-tab" onclick="show('ex2', this)">Exercise 2</div>
+  <div class="nav-tab" onclick="show('ex3', this)">Exercise 3</div>
+  <div class="nav-tab" onclick="show('ex4', this)">Exercise 4</div>
+  <div class="nav-tab" onclick="show('ex5', this)">Exercise 5</div>
+  <div class="nav-tab" onclick="show('bonus', this)">Bonus</div>
+  <div class="nav-tab" onclick="show('feedback', this)">Feedback</div>
+</div>
+
+<!-- PREREQUISITES -->
+<div id="prereq" class="section active">
+  <div class="prereq-dark">
+    <div class="prereq-header">
+      <div class="prereq-icon">
+        <i
+          class="ti ti-settings"
+          style="color: #7a8a9a; font-size: 20px"
+          aria-hidden="true"
+        ></i>
+      </div>
+      <div>
+        <div class="prereq-title">Prerequisites</div>
+        <div class="prereq-sub">All dependencies verified ✓</div>
+      </div>
+    </div>
+    <div class="prereq-cards">
+      <div class="prereq-card">
+        <div class="prereq-card-icon">🌐</div>
+        <div class="prereq-card-name">cURL / Postman</div>
+        <div class="prereq-card-sub">HTTP request tooling</div>
+        <div class="prereq-ready">
+          <span
+            style="
+              width: 7px;
+              height: 7px;
+              background: #3fb950;
+              border-radius: 50%;
+              display: inline-block;
+            "
+          ></span>
+          Ready
+        </div>
+      </div>
+      <div class="prereq-card">
+        <div class="prereq-card-icon">🐍</div>
+        <div class="prereq-card-name">Python 3.12</div>
+        <div class="prereq-card-sub">Core runtime</div>
+        <div class="prereq-ready">
+          <span
+            style="
+              width: 7px;
+              height: 7px;
+              background: #3fb950;
+              border-radius: 50%;
+              display: inline-block;
+            "
+          ></span>
+          Ready
+        </div>
+      </div>
+      <div class="prereq-card">
+        <div class="prereq-card-icon">🤖</div>
+        <div class="prereq-card-name">Ollama + llama3.2</div>
+        <div class="prereq-card-sub">Local LLM runtime</div>
+        <div class="prereq-ready">
+          <span
+            style="
+              width: 7px;
+              height: 7px;
+              background: #3fb950;
+              border-radius: 50%;
+              display: inline-block;
+            "
+          ></span>
+          Ready
+        </div>
+      </div>
+      <div class="prereq-card">
+        <div class="prereq-card-icon">🔗</div>
+        <div class="prereq-card-name">LangChain</div>
+        <div class="prereq-card-sub">Agentic AI framework</div>
+        <div class="prereq-ready">
+          <span
+            style="
+              width: 7px;
+              height: 7px;
+              background: #3fb950;
+              border-radius: 50%;
+              display: inline-block;
+            "
+          ></span>
+          Ready
+        </div>
+      </div>
+    </div>
+    <div class="prereq-pip">
+      <div class="pip-label">pip3 install</div>
+      <div class="pip-tags">
+        <span class="pip-tag">requests</span>
+        <span class="pip-tag">ollama</span>
+        <span class="pip-tag">pytest</span>
+        <span class="pip-tag">langchain</span>
+        <span class="pip-tag">langchain-ollama</span>
+        <span class="pip-tag">langchain-community</span>
+        <span class="pip-tag">langgraph</span>
+        <span class="pip-tag">duckduckgo-search</span>
+        <span class="pip-tag">tenacity</span>
+        <span class="pip-tag">python-dotenv</span>
+      </div>
+      <div class="pip-cmd"><span>$</span> pip3 install -r requirements.txt</div>
+    </div>
+  </div>
+</div>
+
+<!-- EXERCISE 1 -->
+<div id="ex1" class="section">
+  <div class="card">
+    <div class="card-title">
+      <i class="ti ti-world" aria-hidden="true"></i> API data fetching
+      <span class="badge badge-red">Foundation</span>
+    </div>
+    <p
+      style="
+        font-size: 13px;
+        color: var(--color-text-secondary);
+        margin-bottom: 1rem;
+      "
+    >
+      Fetch 20 random users from <code>randomuser.me</code> using Python's
+      <code>requests</code> library with full error handling.
+    </p>
+    <div class="meta-grid">
+      <div class="meta-item">
+        <div class="meta-label">Library</div>
+        <div class="meta-value">requests</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Method</div>
+        <div class="meta-value">GET</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Format</div>
+        <div class="meta-value">JSON</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Results</div>
+        <div class="meta-value">20 users</div>
+      </div>
+    </div>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="t-dot t-red"></div>
+        <div class="t-dot t-amber"></div>
+        <div class="t-dot t-green"></div>
+        <span class="t-title">helperFunction.py</span>
+        <span class="t-lang">PYTHON</span>
+      </div>
+      <div class="terminal-body" style="padding: 10px 0">
+        <div class="t-line">
+          <span class="t-num">1</span
+          ><span class="t-code"><span class="kw">import</span> requests</span>
+        </div>
+        <div class="t-line">
+          <span class="t-num">2</span
+          ><span class="t-code"
+            ><span class="kw">from</span> requests.exceptions
+            <span class="kw">import</span> HTTPError, RequestException,
+            JSONDecodeError</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">3</span
+          ><span class="t-code"
+            ><span class="kw">from</span> datetime
+            <span class="kw">import</span> datetime</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">4</span><span class="t-code"></span>
+        </div>
+        <div class="t-line">
+          <span class="t-num">5</span
+          ><span class="t-code"
+            ><span class="kw">def</span>
+            <span class="fn">get_users</span>(results:
+            <span class="dt">int</span> = <span class="num">20</span>) ->
+            <span class="dt">list</span>:</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">6</span
+          ><span class="t-code">
+            <span class="st"
+              >"""Fetches random user data from randomuser.me API."""</span
+            ></span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">7</span
+          ><span class="t-code">
+            <span class="kw">if</span> results &lt; <span class="num">1</span>
+            <span class="kw">or</span> results >
+            <span class="num">5000</span>:</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">8</span
+          ><span class="t-code">
+            <span class="kw">raise</span> ValueError(<span class="st"
+              >"results must be between 1 and 5000"</span
+            >)</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">9</span
+          ><span class="t-code">
+            url =
+            <span class="st"
+              >f"https://randomuser.me/api/?results=<span class="op"
+                >{results}</span
+              >"</span
+            ></span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">10</span
+          ><span class="t-code"> <span class="kw">try</span>:</span>
+        </div>
+        <div class="t-line">
+          <span class="t-num">11</span
+          ><span class="t-code">
+            response = requests.<span class="fn">get</span>(url, timeout=<span
+              class="num"
+              >10</span
+            >)</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">12</span
+          ><span class="t-code">
+            response.<span class="fn">raise_for_status</span>()
+            <span class="cm"># raises on 4xx / 5xx</span></span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">13</span
+          ><span class="t-code">
+            <span class="kw">return</span> response.<span class="fn">json</span
+            >()[<span class="st">"results"</span>]</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">14</span
+          ><span class="t-code">
+            <span class="kw">except</span> HTTPError
+            <span class="kw">as</span> e:</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">15</span
+          ><span class="t-code">
+            <span class="fn">print</span>(<span class="st"
+              >f"HTTP error: <span class="op">{e}</span>"</span
+            >); <span class="kw">raise</span></span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">16</span
+          ><span class="t-code">
+            <span class="kw">except</span> (JSONDecodeError, KeyError,
+            RequestException):</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">17</span
+          ><span class="t-code"> <span class="kw">raise</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="terminal">
+      <div class="terminal-bar console-bar">
+        <div class="t-dot t-red"></div>
+        <div class="t-dot t-amber"></div>
+        <div class="t-dot t-green"></div>
+        <span class="t-title">SAMPLE CONSOLE OUTPUT</span>
+      </div>
+      <div class="console-body" style="padding: 10px 0">
+        <div class="c-line"><span class="c-green">{</span></div>
+        <div class="c-line">
+          &nbsp;&nbsp;<span class="c-green">"results": [</span>
+        </div>
+        <div class="c-line">
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="c-green">{</span>
+        </div>
+        <div class="c-line">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-green"
+            >"name": { "title": "Mr", "first": "James", "last": "Wilson"
+            },</span
+          >
+        </div>
+        <div class="c-line">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-green"
+            >"dob": { "date": "1985-03-14T12:35:21.948Z", "age": 39 },</span
+          >
+        </div>
+        <div class="c-line">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-green"
+            >"nat": "GB"</span
+          >
+        </div>
+        <div class="c-line">
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="c-green">}</span>
+        </div>
+        <div class="c-line">
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="c-muted"
+            >// ... 19 more users</span
+          >
+        </div>
+        <div class="c-line">&nbsp;&nbsp;<span class="c-green">]</span></div>
+        <div class="c-line"><span class="c-green">}</span></div>
+        <div class="c-line" style="margin-top: 4px">
+          <span class="c-pass">✅ Exercise 1 - Fetched 20 users</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXERCISE 2 -->
+<div id="ex2" class="section">
+  <div class="card">
+    <div class="card-title">
+      <i class="ti ti-filter" aria-hidden="true"></i> Data transformation &amp;
+      filtering <span class="badge badge-blue">Data processing</span>
+    </div>
+    <p
+      style="
+        font-size: 13px;
+        color: var(--color-text-secondary);
+        margin-bottom: 1rem;
+      "
+    >
+      Format API response into <code>"First Last"</code> strings, filtering out
+      anyone born after year 2000.
+    </p>
+    <div class="pipeline">
+      <div class="pipe-box red">API response</div>
+      <span class="pipe-arrow">→</span>
+      <div class="pipe-box">Parse DOB</div>
+      <span class="pipe-arrow">→</span>
+      <div class="pipe-box red">Filter &gt; 2000</div>
+      <span class="pipe-arrow">→</span>
+      <div class="pipe-box">Format name</div>
+      <span class="pipe-arrow">→</span>
+      <div class="pipe-box green">Return list</div>
+    </div>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="t-dot t-red"></div>
+        <div class="t-dot t-amber"></div>
+        <div class="t-dot t-green"></div>
+        <span class="t-title">helperFunction.py</span>
+        <span class="t-lang">PYTHON</span>
+      </div>
+      <div class="terminal-body" style="padding: 10px 0">
+        <div class="t-line">
+          <span class="t-num">1</span
+          ><span class="t-code"
+            ><span class="kw">def</span>
+            <span class="fn">format_users</span>(users:
+            <span class="dt">list</span>) -> <span class="dt">list</span>[<span
+              class="dt"
+              >str</span
+            >]:</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">2</span
+          ><span class="t-code">
+            <span class="st"
+              >"""Returns 'First Last' strings for users born ≤ 2000."""</span
+            ></span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">3</span><span class="t-code"> result = []</span>
+        </div>
+        <div class="t-line">
+          <span class="t-num">4</span
+          ><span class="t-code">
+            <span class="kw">for</span> user
+            <span class="kw">in</span> users:</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">5</span
+          ><span class="t-code">
+            dob_str = user[<span class="st">"dob"</span>][<span class="st"
+              >"date"</span
+            >]</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">6</span
+          ><span class="t-code">
+            birth_year = datetime.<span class="fn">fromisoformat</span>(</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">7</span
+          ><span class="t-code">
+            dob_str.<span class="fn">replace</span>(<span class="st">"Z"</span>,
+            <span class="st">"+00:00"</span>)</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">8</span><span class="t-code"> ).year</span>
+        </div>
+        <div class="t-line">
+          <span class="t-num">9</span
+          ><span class="t-code">
+            <span class="kw">if</span> birth_year >
+            <span class="num">2000</span>:
+            <span class="cm"># filter post-2000</span></span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">10</span
+          ><span class="t-code"> <span class="kw">continue</span></span>
+        </div>
+        <div class="t-line">
+          <span class="t-num">11</span
+          ><span class="t-code">
+            first = user[<span class="st">"name"</span>][<span class="st"
+              >"first"</span
+            >]</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">12</span
+          ><span class="t-code">
+            last = user[<span class="st">"name"</span>][<span class="st"
+              >"last"</span
+            >]</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">13</span
+          ><span class="t-code">
+            result.<span class="fn">append</span>(<span class="st"
+              >f"<span class="op">{first}</span>
+              <span class="op">{last}</span>"</span
+            >)</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">14</span
+          ><span class="t-code"> <span class="kw">return</span> result</span>
+        </div>
+      </div>
+    </div>
+    <div class="terminal">
+      <div class="terminal-bar console-bar">
+        <div class="t-dot t-red"></div>
+        <div class="t-dot t-amber"></div>
+        <div class="t-dot t-green"></div>
+        <span class="t-title">CONSOLE OUTPUT (EXAMPLE WITH 20 USERS)</span>
+      </div>
+      <div class="console-body" style="padding: 10px 0">
+        <div class="c-line"><span class="c-green">[</span></div>
+        <div class="c-line">
+          &nbsp;&nbsp;<span class="c-green"
+            >'Marie Lambert', 'Noah Hoffmann', 'Sofia Marchetti',</span
+          >
+        </div>
+        <div class="c-line">
+          &nbsp;&nbsp;<span class="c-green"
+            >'James Wilson', 'Anna Kowalski', 'Carlos Romero',</span
+          >
+        </div>
+        <div class="c-line">
+          &nbsp;&nbsp;<span class="c-green"
+            >'Elena Petrov', 'Hans Mueller', 'Liam O'Connor'</span
+          >
+        </div>
+        <div class="c-line"><span class="c-green">]</span></div>
+        <div class="c-line" style="margin-top: 4px">
+          <span class="c-pass"
+            >📌 15 of 20 users born in or before 2000 (5 filtered out)</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXERCISE 3 -->
+<div id="ex3" class="section">
+  <div class="card">
+    <div class="card-title">
+      <i class="ti ti-test-pipe" aria-hidden="true"></i> Unit &amp; integration
+      testing <span class="badge badge-green">Quality assurance</span>
+    </div>
+    <p
+      style="
+        font-size: 13px;
+        color: var(--color-text-secondary);
+        margin-bottom: 1rem;
+      "
+    >
+      10 pytest tests — 9 unit + 1 integration — covering happy paths, edge
+      cases, and mocked HTTP.
+    </p>
+    <div class="meta-grid" style="margin-bottom: 1rem">
+      <div class="meta-item">
+        <div class="meta-label">Total tests</div>
+        <div class="meta-value">10</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Framework</div>
+        <div class="meta-value">pytest</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Unit tests</div>
+        <div class="meta-value">9</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Integration</div>
+        <div class="meta-value">1</div>
+      </div>
+    </div>
+    <div class="test-grid" style="margin-bottom: 1rem">
+      <div class="test-item">
+        <i
+          class="ti ti-check"
+          style="color: #3b6d11; font-size: 14px; flex-shrink: 0"
+          aria-hidden="true"
+        ></i>
+        <div>
+          <div class="test-name">test_returns_list</div>
+          <div class="test-desc">Return type is always a list</div>
+        </div>
+        <span class="test-badge badge-green">Type safety</span>
+      </div>
+      <div class="test-item">
+        <i
+          class="ti ti-check"
+          style="color: #3b6d11; font-size: 14px; flex-shrink: 0"
+          aria-hidden="true"
+        ></i>
+        <div>
+          <div class="test-name">test_correct_count</div>
+          <div class="test-desc">Correct number of filtered users</div>
+        </div>
+        <span class="test-badge badge-blue">Filtering</span>
+      </div>
+      <div class="test-item">
+        <i
+          class="ti ti-check"
+          style="color: #3b6d11; font-size: 14px; flex-shrink: 0"
+          aria-hidden="true"
+        ></i>
+        <div>
+          <div class="test-name">test_name_format</div>
+          <div class="test-desc">Names in "First Last" format</div>
+        </div>
+        <span class="test-badge badge-amber">Formatting</span>
+      </div>
+      <div class="test-item">
+        <i
+          class="ti ti-check"
+          style="color: #3b6d11; font-size: 14px; flex-shrink: 0"
+          aria-hidden="true"
+        ></i>
+        <div>
+          <div class="test-name">test_filters_post_2000</div>
+          <div class="test-desc">Post-2000 users excluded</div>
+        </div>
+        <span class="test-badge badge-blue">Filtering</span>
+      </div>
+      <div class="test-item">
+        <i
+          class="ti ti-check"
+          style="color: #3b6d11; font-size: 14px; flex-shrink: 0"
+          aria-hidden="true"
+        ></i>
+        <div>
+          <div class="test-name">test_year_2000_edge_case</div>
+          <div class="test-desc">Year 2000 births included</div>
+        </div>
+        <span class="test-badge badge-purple">Edge case</span>
+      </div>
+      <div class="test-item">
+        <i
+          class="ti ti-check"
+          style="color: #3b6d11; font-size: 14px; flex-shrink: 0"
+          aria-hidden="true"
+        ></i>
+        <div>
+          <div class="test-name">test_empty_response</div>
+          <div class="test-desc">Empty input returns empty list</div>
+        </div>
+        <span class="test-badge badge-purple">Edge case</span>
+      </div>
+      <div class="test-item">
+        <i
+          class="ti ti-check"
+          style="color: #3b6d11; font-size: 14px; flex-shrink: 0"
+          aria-hidden="true"
+        ></i>
+        <div>
+          <div class="test-name">test_all_post_2000</div>
+          <div class="test-desc">All post-2000 → empty result</div>
+        </div>
+        <span class="test-badge badge-purple">Edge case</span>
+      </div>
+      <div class="test-item">
+        <i
+          class="ti ti-check"
+          style="color: #3b6d11; font-size: 14px; flex-shrink: 0"
+          aria-hidden="true"
+        ></i>
+        <div>
+          <div class="test-name">test_names_are_strings</div>
+          <div class="test-desc">Names are non-empty strings</div>
+        </div>
+        <span class="test-badge badge-green">Type safety</span>
+      </div>
+      <div class="test-item">
+        <i
+          class="ti ti-check"
+          style="color: #3b6d11; font-size: 14px; flex-shrink: 0"
+          aria-hidden="true"
+        ></i>
+        <div>
+          <div class="test-name">test_missing_results_key</div>
+          <div class="test-desc">Raises KeyError on bad API</div>
+        </div>
+        <span class="test-badge badge-red">Robustness</span>
+      </div>
+      <div class="test-item">
+        <i
+          class="ti ti-check"
+          style="color: #3b6d11; font-size: 14px; flex-shrink: 0"
+          aria-hidden="true"
+        ></i>
+        <div>
+          <div class="test-name">test_full_pipeline</div>
+          <div class="test-desc">Mocked HTTP → end-to-end</div>
+        </div>
+        <span class="test-badge badge-blue">Integration</span>
+      </div>
+    </div>
+    <div class="terminal">
+      <div class="terminal-bar console-bar">
+        <div class="t-dot t-red"></div>
+        <div class="t-dot t-amber"></div>
+        <div class="t-dot t-green"></div>
+        <span class="t-title">PYTEST OUTPUT — ALL TESTS PASSING</span>
+      </div>
+      <div class="console-body" style="padding: 10px 0">
+        <div class="c-line">
+          <span class="c-muted"
+            >platform darwin -- Python 3.12.8, pytest-9.0.3</span
+          >
+        </div>
+        <div class="c-line">
+          <span class="c-muted">collected 10 items</span>
+        </div>
+        <div class="c-line" style="margin-top: 4px">
+          <span class="c-pass"
+            >test_main.py::test_returns_list PASSED [ 10%]</span
+          >
+        </div>
+        <div class="c-line">
+          <span class="c-pass"
+            >test_main.py::test_correct_count PASSED [ 20%]</span
+          >
+        </div>
+        <div class="c-line">
+          <span class="c-pass"
+            >test_main.py::test_name_format PASSED [ 30%]</span
+          >
+        </div>
+        <div class="c-line">
+          <span class="c-pass"
+            >test_main.py::test_filters_post_2000 PASSED [ 40%]</span
+          >
+        </div>
+        <div class="c-line">
+          <span class="c-pass"
+            >test_main.py::test_includes_year_2000 PASSED [ 50%]</span
+          >
+        </div>
+        <div class="c-line">
+          <span class="c-pass"
+            >test_main.py::test_empty_response PASSED [ 60%]</span
+          >
+        </div>
+        <div class="c-line">
+          <span class="c-pass"
+            >test_main.py::test_all_post_2000 PASSED [ 70%]</span
+          >
+        </div>
+        <div class="c-line">
+          <span class="c-pass"
+            >test_main.py::test_names_are_strings PASSED [ 80%]</span
+          >
+        </div>
+        <div class="c-line">
+          <span class="c-pass"
+            >test_main.py::test_missing_results_key PASSED [ 90%]</span
+          >
+        </div>
+        <div class="c-line">
+          <span class="c-pass"
+            >test_main.py::test_full_pipeline PASSED [100%]</span
+          >
+        </div>
+        <div class="c-line" style="margin-top: 4px">
+          <span class="c-pass"
+            >======================== 10 passed in 0.94s
+            ========================</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXERCISE 4 -->
+<div id="ex4" class="section">
+  <div class="card">
+    <div class="card-title">
+      <i class="ti ti-brain" aria-hidden="true"></i> LLM person identification
+      <span class="badge badge-purple">AI integration</span>
+    </div>
+    <p
+      style="
+        font-size: 13px;
+        color: var(--color-text-secondary);
+        margin-bottom: 1rem;
+      "
+    >
+      Call Ollama / llama3.2 locally to identify whether each random user is a
+      public figure.
+    </p>
+    <div class="meta-grid">
+      <div class="meta-item">
+        <div class="meta-label">Model</div>
+        <div class="meta-value">llama3.2</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Temperature</div>
+        <div class="meta-value">0.1</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Max tokens</div>
+        <div class="meta-value">150</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Sample size</div>
+        <div class="meta-value">5 users</div>
+      </div>
+    </div>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="t-dot t-red"></div>
+        <div class="t-dot t-amber"></div>
+        <div class="t-dot t-green"></div>
+        <span class="t-title">llm.py</span>
+        <span class="t-lang">PYTHON</span>
+      </div>
+      <div class="terminal-body" style="padding: 10px 0">
+        <div class="t-line">
+          <span class="t-num">1</span
+          ><span class="t-code"
+            >SYSTEM_PROMPT =
+            <span class="st">"""You are a strict fact-checker:</span></span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">2</span
+          ><span class="t-code"
+            ><span class="st"
+              >1. Search for the EXACT name given to you.</span
+            ></span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">3</span
+          ><span class="t-code"
+            ><span class="st"
+              >2. If results show a DIFFERENT person → NOT_NOTABLE.</span
+            ></span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">4</span
+          ><span class="t-code"
+            ><span class="st"
+              >3. Never substitute or guess a similar name."""</span
+            ></span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">5</span><span class="t-code"></span>
+        </div>
+        <div class="t-line">
+          <span class="t-num">6</span
+          ><span class="t-code"
+            ><span class="kw">def</span>
+            <span class="fn">identify_person</span>(name:
+            <span class="dt">str</span>, nationality:
+            <span class="dt">str</span>, year: <span class="dt">int</span>) ->
+            <span class="dt">str</span>:</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">7</span
+          ><span class="t-code">
+            response = ollama.<span class="fn">chat</span>(</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">8</span
+          ><span class="t-code">
+            model=<span class="st">"llama3.2"</span>,</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">9</span><span class="t-code"> messages=[</span>
+        </div>
+        <div class="t-line">
+          <span class="t-num">10</span
+          ><span class="t-code">
+            {<span class="st">"role"</span>: <span class="st">"system"</span>,
+            <span class="st">"content"</span>: SYSTEM_PROMPT},</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">11</span
+          ><span class="t-code">
+            {<span class="st">"role"</span>: <span class="st">"user"</span>,
+            <span class="st">"content"</span>: prompt},</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">12</span><span class="t-code"> ],</span>
+        </div>
+        <div class="t-line">
+          <span class="t-num">13</span
+          ><span class="t-code">
+            options={<span class="st">"temperature"</span>:
+            <span class="num">0.1</span>, <span class="st">"num_predict"</span>:
+            <span class="num">150</span>}</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">14</span><span class="t-code"> )</span>
+        </div>
+        <div class="t-line">
+          <span class="t-num">15</span
+          ><span class="t-code">
+            <span class="kw">return</span> response[<span class="st"
+              >"message"</span
+            >][<span class="st">"content"</span>].<span class="fn">strip</span
+            >()</span
+          >
+        </div>
+      </div>
+    </div>
+    <div class="terminal">
+      <div class="terminal-bar console-bar">
+        <div class="t-dot t-red"></div>
+        <div class="t-dot t-amber"></div>
+        <div class="t-dot t-green"></div>
+        <span class="t-title">CONSOLE OUTPUT</span>
+      </div>
+      <div class="console-body" style="padding: 10px 0">
+        <div class="c-line">
+          <span class="c-blue">👤 Marie Lambert (FR, b. 1978)</span>
+        </div>
+        <div class="c-line">
+          &nbsp;&nbsp;&nbsp;<span class="c-muted"
+            >NOT_NOTABLE — private individual, no public records found.</span
+          >
+        </div>
+        <div class="c-line">
+          <span class="c-blue">👤 James Wilson (GB, b. 1985)</span>
+        </div>
+        <div class="c-line">
+          &nbsp;&nbsp;&nbsp;<span class="c-muted"
+            >NOT_NOTABLE — private individual, no public records found.</span
+          >
+        </div>
+        <div class="c-line">
+          <span class="c-blue">👤 Carlos Romero (ES, b. 1971)</span>
+        </div>
+        <div class="c-line">
+          &nbsp;&nbsp;&nbsp;<span class="c-muted"
+            >NOT_NOTABLE — private individual, no public records found.</span
+          >
+        </div>
+      </div>
+    </div>
+    <div class="warn-card">
+      <strong style="font-weight: 500">Hallucination note:</strong> llama3.2
+      (3B) tends to substitute a well-known person for unknown names.
+      Mitigations: <code>NOT_NOTABLE</code> sentinel + name-match check +
+      <code>temperature=0.1</code>. For production, <code>gpt-4o-mini</code> is
+      strongly recommended.
+    </div>
+  </div>
+</div>
+
+<!-- EXERCISE 5 -->
+<div id="ex5" class="section">
+  <div class="card">
+    <div class="card-title">
+      <i class="ti ti-bolt" aria-hidden="true"></i> Agentic LangChain workflow
+      <span class="badge badge-red">Advanced AI</span>
+    </div>
+    <p
+      style="
+        font-size: 13px;
+        color: var(--color-text-secondary);
+        margin-bottom: 1rem;
+      "
+    >
+      A LangGraph ReAct agent with DuckDuckGo search finds each person's
+      best-known work. A name-match guard rejects wrong-person substitutions.
+    </p>
+    <div class="pipeline">
+      <div class="pipe-box red">Task input</div>
+      <span class="pipe-arrow">→</span>
+      <div class="pipe-box">LLM reasoning</div>
+      <span class="pipe-arrow">→</span>
+      <div class="pipe-box">DuckDuckGo</div>
+      <span class="pipe-arrow">→</span>
+      <div class="pipe-box">Observation</div>
+      <span class="pipe-arrow">→</span>
+      <div class="pipe-box green">Final answer</div>
+    </div>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="t-dot t-red"></div>
+        <div class="t-dot t-amber"></div>
+        <div class="t-dot t-green"></div>
+        <span class="t-title">agent.py</span>
+        <span class="t-lang">PYTHON</span>
+      </div>
+      <div class="terminal-body" style="padding: 10px 0">
+        <div class="t-line">
+          <span class="t-num">1</span
+          ><span class="t-code"
+            ><span class="kw">from</span> langchain_ollama
+            <span class="kw">import</span> ChatOllama</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">2</span
+          ><span class="t-code"
+            ><span class="kw">from</span> langchain_community.tools
+            <span class="kw">import</span> DuckDuckGoSearchRun</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">3</span
+          ><span class="t-code"
+            ><span class="kw">from</span> langgraph.prebuilt
+            <span class="kw">import</span> create_react_agent</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">4</span><span class="t-code"></span>
+        </div>
+        <div class="t-line">
+          <span class="t-num">5</span
+          ><span class="t-code"
+            >agent_executor = <span class="fn">create_react_agent</span>(</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">6</span
+          ><span class="t-code">
+            model=llm, tools=[search_tool], prompt=SYSTEM_PROMPT</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">7</span><span class="t-code">)</span>
+        </div>
+        <div class="t-line">
+          <span class="t-num">8</span><span class="t-code"></span>
+        </div>
+        <div class="t-line">
+          <span class="t-num">9</span
+          ><span class="t-code"
+            ><span class="kw">def</span>
+            <span class="fn">get_best_work</span>(name:
+            <span class="dt">str</span>) -> <span class="dt">str</span>:</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">10</span
+          ><span class="t-code">
+            result = agent_executor.<span class="fn">invoke</span>({<span
+              class="st"
+              >"messages"</span
+            >: [</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">11</span
+          ><span class="t-code">
+            (<span class="st">"human"</span>,
+            <span class="st"
+              >f"Who is <span class="op">{name}</span> and what is their most
+              acclaimed work?"</span
+            >)</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">12</span><span class="t-code"> ]})</span>
+        </div>
+        <div class="t-line">
+          <span class="t-num">13</span
+          ><span class="t-code">
+            output = result[<span class="st">"messages"</span>][-<span
+              class="num"
+              >1</span
+            >].content</span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">14</span
+          ><span class="t-code">
+            <span class="kw">if</span> <span class="st">"NOT_NOTABLE"</span>
+            <span class="kw">in</span> output: <span class="kw">return</span>
+            <span class="st">"NOT_NOTABLE"</span></span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">15</span
+          ><span class="t-code">
+            <span class="kw">if not</span>
+            <span class="fn">names_match</span>(name, output):
+            <span class="kw">return</span>
+            <span class="st">"NOT_NOTABLE"</span></span
+          >
+        </div>
+        <div class="t-line">
+          <span class="t-num">16</span
+          ><span class="t-code"> <span class="kw">return</span> output</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BONUS -->
+<div id="bonus" class="section">
+  <div class="card">
+    <div class="card-title">
+      <i class="ti ti-star" aria-hidden="true"></i> Bonus: enhancements &amp;
+      best practices <span class="badge badge-amber">Bonus</span>
+    </div>
+    <div class="bonus-grid" style="margin-bottom: 1rem">
+      <div
+        style="
+          background: var(--color-background-secondary);
+          border-radius: var(--border-radius-md);
+          padding: 1rem;
+        "
+      >
+        <div
+          style="
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            margin-bottom: 0.5rem;
+          "
+        >
+          Better result presentation
+        </div>
+        <ul class="check-list">
+          <li>print_results() with summary header</li>
+          <li>Trophy for public figures, circle for private</li>
+          <li>Count of public vs private individuals</li>
+          <li>Safe .get() dict access with defaults</li>
+        </ul>
+      </div>
+      <div
+        style="
+          background: var(--color-background-secondary);
+          border-radius: var(--border-radius-md);
+          padding: 1rem;
+        "
+      >
+        <div
+          style="
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            margin-bottom: 0.5rem;
+          "
+        >
+          Performance improvements
+        </div>
+        <ul class="check-list">
+          <li>asyncio.gather — all calls in parallel</li>
+          <li>get_running_loop() — Python 3.10+ safe</li>
+          <li>lru_cache(maxsize=256) for repeated names</li>
+          <li>tenacity retry — 2s → 4s → 8s back-off</li>
+          <li>before_sleep_log — automatic retry logging</li>
+          <li>structured logging replaces bare print()</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card-title">
+      <i class="ti ti-sitemap" aria-hidden="true"></i> Architecture flow
+    </div>
+    <div class="arch-flow">
+      <div>
+        <span class="a-yellow arch-box">NN GenAI Assessment Pipeline</span>
+      </div>
+      <div style="margin-top: 6px">│</div>
+      <div>
+        ├── <span class="a-white arch-box">Exercise 1</span> HTTP GET
+        randomuser.me/api/?results=20
+      </div>
+      <div>
+        │&nbsp;&nbsp;&nbsp;<span class="a-green">get_users()</span>
+        <span class="arch-arrow">────────────────────►</span> raw JSON list
+      </div>
+      <div>│</div>
+      <div>
+        ├── <span class="a-white arch-box">Exercise 2</span> Parse + Filter +
+        Format
+      </div>
+      <div>
+        │&nbsp;&nbsp;&nbsp;<span class="a-green">format_users()</span>
+        <span class="arch-arrow">──────────────────►</span> List[str] born ≤
+        2000
+      </div>
+      <div>│</div>
+      <div>
+        ├── <span class="a-white arch-box">Exercise 3</span> pytest unit +
+        integration
+      </div>
+      <div>
+        │&nbsp;&nbsp;&nbsp;<span class="a-green">test_main.py</span>
+        <span class="arch-arrow">────────────────────►</span> 10 tests pass ✓
+      </div>
+      <div>│</div>
+      <div>
+        ├── <span class="a-white arch-box">Exercise 4</span> Ollama / llama3.2
+        (sample 5)
+      </div>
+      <div>
+        │&nbsp;&nbsp;&nbsp;<span class="a-green">identify_batch()</span>
+        <span class="arch-arrow">────────────────►</span> bio strings
+      </div>
+      <div>│</div>
+      <div>
+        ├── <span class="a-pink arch-box">Exercise 5</span> LangGraph ReAct
+        Agent
+      </div>
+      <div>│&nbsp;&nbsp;&nbsp;│ Thought → Action → Observation → ...</div>
+      <div>│&nbsp;&nbsp;&nbsp;└─ DuckDuckGoSearchRun</div>
+      <div>
+        │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="a-green"
+          >run_exercise_5_async()</span
+        >
+        <span class="arch-arrow">──────►</span> best work (parallel)
+      </div>
+      <div>│</div>
+      <div>
+        └── <span class="a-yellow arch-box">Bonus</span> Enhanced output
+      </div>
+      <div>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="a-green">print_results()</span>
+        <span class="arch-arrow">──────────────────►</span> formatted profiles
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FEEDBACK -->
+<div id="feedback" class="section">
+  <div class="card">
+    <div class="card-title">
+      <i class="ti ti-message-circle" aria-hidden="true"></i> Assessment
+      feedback
+    </div>
+    <div class="feedback-grid">
+      <div class="feedback-card">
+        <div class="fb-label">Difficulty</div>
+        <div class="fb-value">Medium</div>
+        <div class="fb-sub">Well-calibrated for a GenAI Engineer role</div>
+      </div>
+      <div class="feedback-card">
+        <div class="fb-label">Time taken</div>
+        <div class="fb-value">~90 min</div>
+        <div class="fb-sub">
+          Exercises 1–5 within window; bonus adds ~20 min
+        </div>
+      </div>
+      <div class="feedback-card">
+        <div class="fb-label">Enjoyment</div>
+        <div class="fb-value">High</div>
+        <div class="fb-sub">Logical progression from API to agentic AI</div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div>
+        <div
+          style="
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            margin-bottom: 0.5rem;
+          "
+        >
+          What went well
+        </div>
+        <ul class="check-list">
+          <li>randomuser.me is simple and well-documented</li>
+          <li>create_react_agent makes the loop concise</li>
+          <li>tenacity and lru_cache are drop-in improvements</li>
+          <li>Clear incremental exercise structure</li>
+        </ul>
+      </div>
+      <div>
+        <div
+          style="
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            margin-bottom: 0.5rem;
+          "
+        >
+          Observations &amp; suggestions
+        </div>
+        <ul class="check-list">
+          <li>
+            randomuser.me generates fictional people — LLM always "not famous"
+            (expected)
+          </li>
+          <li>DuckDuckGo rate limits require careful batching</li>
+          <li>
+            llama3.2 hallucinates — gpt-4o-mini recommended for production
+          </li>
+          <li>
+            asyncio.gather cuts wall time from n×delay to ~1 call duration
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div
+      style="
+        margin-top: 1.25rem;
+        border-top: 0.5px solid var(--color-border-tertiary);
+        padding-top: 1rem;
+      "
+    >
+      <div
+        style="
+          font-size: 13px;
+          font-weight: 500;
+          color: var(--color-text-primary);
+          margin-bottom: 0.75rem;
+        "
+      >
+        Tech stack
+      </div>
+      <div
+        style="
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+          gap: 4px;
+        "
+      >
+        <div class="stack-item">
+          <div class="stack-dot"></div>
+          Python 3.12 — core language
+        </div>
+        <div class="stack-item">
+          <div class="stack-dot"></div>
+          requests — HTTP client
+        </div>
+        <div class="stack-item">
+          <div class="stack-dot"></div>
+          pytest — testing framework
+        </div>
+        <div class="stack-item">
+          <div class="stack-dot"></div>
+          Ollama + llama3.2 — local LLM
+        </div>
+        <div class="stack-item">
+          <div class="stack-dot"></div>
+          LangChain + LangGraph — agent
+        </div>
+        <div class="stack-item">
+          <div class="stack-dot"></div>
+          DuckDuckGo — search tool
+        </div>
+        <div class="stack-item">
+          <div class="stack-dot"></div>
+          tenacity — retry logic
+        </div>
+        <div class="stack-item">
+          <div class="stack-dot"></div>
+          asyncio — parallel execution
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function show(id, el) {
+    document
+      .querySelectorAll(".section")
+      .forEach((s) => s.classList.remove("active"));
+    document
+      .querySelectorAll(".nav-tab")
+      .forEach((t) => t.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+    el.classList.add("active");
+  }
+</script>
