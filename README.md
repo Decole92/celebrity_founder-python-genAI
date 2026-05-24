@@ -25,6 +25,9 @@ A Python project that fetches random user data, filters it, identifies public fi
 ├── README.md
 ├── .env.local               # Local environment variables (not committed)
 ├── .gitignore
+├── code/presentation/feedback/
+│   ├── GenAI Engineer Assessment v2.html
+│   └── GenAI Engineer Assessment v2.pdf   # export from HTML (Print → Save as PDF)
 └── lib/
     ├── helperFunction.py    # Exercise 1 & 2: get_users, format_users, make_user
     ├── llm.py               # Exercise 4: identify_person, identify_batch (Ollama)
@@ -82,8 +85,8 @@ The script will:
 
 1. **Exercise 1** — Fetch 20 random users from `randomuser.me`
 2. **Exercise 2** — Format and filter names (born ≤ 2000)
-3. **Exercise 4** — Identify each person using the local LLM (first 15 users, ~1.3 s delay between calls)
-4. **Exercise 5** — Run the LangChain agent to find each person's best work (first 15 users, ~2.0 s delay)
+3. **Exercise 4** — Identify 5 people (born ≤ 2000) using the local LLM (~1.3 s delay between calls)
+4. **Exercise 5** — Run the LangChain agent on the same 5 filtered users (parallel async calls)
 5. **Bonus 1** — Structured console output distinguishing public figures from private individuals
 
 ---
@@ -159,7 +162,9 @@ works = asyncio.run(run_exercise_5_async(users, limit=5))
 
 ### Bonus 3 — Architecture flow
 
-See slide 8 of the accompanying presentation (`presentation.pdf` / `presentation.pptx`).
+See slide 8 of the accompanying presentation:
+[`code/presentation/feedback/GenAI Engineer Assessment v2.html`](code/presentation/feedback/GenAI%20Engineer%20Assessment%20v2.html)
+(or the exported PDF in the same folder).
 
 High-level flow:
 
@@ -184,7 +189,7 @@ get_users()  ──►  format_users()  ──►  identify_batch()  ──►  
 - `timeout=10` on `requests.get` to prevent hanging
 - Input validation (`results` 1–5000) before hitting the API
 - Rate-limit delay (`time.sleep`) between LLM calls
-- `max_iterations` cap on LangGraph agent
+- `recursion_limit` cap on LangGraph agent (5 steps max)
 - `NOT_NOTABLE` sentinel to prevent hallucination leaking through
 - Name-match check to block wrong-person substitution
 - `.env`-ready structure — never hardcode API keys

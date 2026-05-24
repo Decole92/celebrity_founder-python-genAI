@@ -148,7 +148,7 @@ def get_best_work_with_retry(name: str) -> str:
 # ✅ timeout=10 on requests.get to prevent hanging
 # ✅ Input validation (results 1-5000) before hitting the API
 # ✅ rate-limit delay between LLM calls (time.sleep)
-# ✅ max_iterations=3 cap on LangGraph agent
+# ✅ recursion_limit cap on LangGraph agent (see lib/agent.py)
 # ✅ NOT_NOTABLE sentinel — prevents hallucination leaking through
 # ✅ Name match check — blocks wrong-person substitution
 # ✅ .env for secrets — never hardcode API keys

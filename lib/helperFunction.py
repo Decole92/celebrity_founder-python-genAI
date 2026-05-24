@@ -40,21 +40,25 @@ def get_users(results: int = 20) -> list:
  
 
 
+def _birth_year(user: dict) -> int:
+    dob_str = user["dob"]["date"]
+    return datetime.fromisoformat(dob_str.replace("Z", "+00:00")).year
+
+
+def filter_users_born_on_or_before(users: list, year: int = 2000) -> list:
+    """Return user records born in or before the given year (Exercise 2 filter)."""
+    return [u for u in users if _birth_year(u) <= year]
+
+
 def format_users(users: list) -> list[str]:
     """
     Returns a list of 'FirstName LastName' strings
     for users born on or before 31 Dec 2000.
     """
     result = []
-    for user in users:
-        dob_str = user["dob"]["date"]
-        birth_year = datetime.fromisoformat(
-            dob_str.replace("Z", "+00:00")
-        ).year
-        if birth_year > 2000:
-            continue
+    for user in filter_users_born_on_or_before(users):
         first = user["name"]["first"]
-        last  = user["name"]["last"]
+        last = user["name"]["last"]
         result.append(f"{first} {last}")
     return result
 

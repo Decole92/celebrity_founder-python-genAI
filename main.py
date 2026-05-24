@@ -1,14 +1,19 @@
-from lib.helperFunction import get_users, format_users
+from lib.helperFunction import get_users, format_users, filter_users_born_on_or_before
 from lib.llm import identify_batch
-from lib.agent import run_exercise_5
-from lib.bonus import (
-    print_results,           # BONUS 1 — better output formatting
-    run_exercise_5_async,    # BONUS 2 — async parallel calls
-    get_best_work_cached,    # BONUS 2 — caching
-    get_best_work_with_retry # BONUS 2 — retry with back-off
-)
-import json
+from lib.bonus import print_results, run_exercise_5_async
 import asyncio
+
+
+def print_name_list(names: list[str]) -> None:
+    """Print names in the assessment example format (single-quoted list)."""
+    if not names:
+        print("[]")
+        return
+    print("[")
+    for i, name in enumerate(names):
+        suffix = "," if i < len(names) - 1 else ""
+        print(f"  '{name}'{suffix}")
+    print("]")
 
 
 def main():
@@ -21,17 +26,21 @@ def main():
 
         # ── Exercise 2 ────────────────────────────────────────────
         names = format_users(users)
-        filtered_out = len(users) - len(names)
+        filtered_users = filter_users_born_on_or_before(users)
+        filtered_out = len(users) - len(filtered_users)
         print(f"✅ Exercise 2 - Formatted names")
-        print(f"📌 {len(names)} of {len(users)} users born in or before 2000 ({filtered_out} filtered out)\n")
-        print(json.dumps(names, indent=2, ensure_ascii=False))
+        print(
+            f"📌 {len(names)} of {len(users)} users born in or before 2000 "
+            f"({filtered_out} filtered out)\n"
+        )
+        print_name_list(names)
 
         # ── Exercise 4 ────────────────────────────────────────────
         print("\n" + "=" * 60)
         print("🧠 EXERCISE 4 - LLM Identification Results")
         print("=" * 60 + "\n")
 
-        enriched = identify_batch(users, limit=5, delay=1.3)
+        enriched = identify_batch(filtered_users, limit=5, delay=1.3)
 
         for person in enriched:
             print(f"👤 {person['name']} ({person['nationality']}, b. {person['birth_year']})")
@@ -42,22 +51,9 @@ def main():
         print("🤖 EXERCISE 5 - LangChain Agent: Best Work")
         print("=" * 60 + "\n")
 
-        # BONUS 2a — async parallel execution (faster than sequential)
-        # Runs all agent calls concurrently instead of one by one.
-        # Swap this for run_exercise_5(users, limit=5) to go back to sequential.
-        works = asyncio.run(run_exercise_5_async(users, limit=5))
+        works = asyncio.run(run_exercise_5_async(filtered_users, limit=5))
 
-        # BONUS 2b — cached lookup example
-        # If the same name appears again later in the session,
-        # get_best_work_cached returns instantly without hitting the LLM.
-        # Example: get_best_work_cached("Marie Curie")
-
-        # BONUS 2c — retry with exponential back-off example
-        # Use get_best_work_with_retry("name") anywhere instead of get_best_work("name")
-        # to automatically retry up to 3 times on DuckDuckGo or Ollama failures.
-        # Example: get_best_work_with_retry("Alan Turing")
-
-        # BONUS 1 — structured output (public figures vs private individuals)
+        # ── Bonus 1 ───────────────────────────────────────────────
         print_results(works)
 
     except Exception as e:

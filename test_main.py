@@ -1,6 +1,5 @@
-import pytest   
-from main import format_users, get_users
-from lib.helperFunction import make_user
+import pytest
+from lib.helperFunction import make_user, format_users, get_users, filter_users_born_on_or_before
 from unittest.mock import patch, Mock
 
 

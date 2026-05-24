@@ -32,6 +32,8 @@ SYSTEM_PROMPT = """You are a strict fact-checker. Rules you must never break:
 5. Return NOT_NOTABLE when in doubt.
 Only describe someone if search results confirm their exact name."""
 
+AGENT_RECURSION_LIMIT = 5
+
 agent_executor = create_react_agent(
     model=llm,
     tools=[search_tool],
@@ -48,9 +50,14 @@ def names_match(query: str, response: str) -> bool:
 
 def get_best_work(name: str) -> str:
     try:
-        result = agent_executor.invoke({
-            "messages": [("human", f"Who is {name} and what is their most acclaimed work or achievement?")]
-        })
+        result = agent_executor.invoke(
+            {
+                "messages": [
+                    ("human", f"Who is {name} and what is their most acclaimed work or achievement?")
+                ]
+            },
+            config={"recursion_limit": AGENT_RECURSION_LIMIT},
+        )
         output = result["messages"][-1].content
 
         if "NOT_NOTABLE" in output:
