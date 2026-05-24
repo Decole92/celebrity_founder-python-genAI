@@ -6,12 +6,12 @@ A Python project that fetches random user data, filters it, identifies public fi
 
 ## Prerequisites
 
-| Requirement | Version |
-|---|---|
-| Python | 3.10+ |
-| pip3 | latest |
-| [Ollama](https://ollama.com) | latest |
-| llama3.2 model | pulled via Ollama |
+| Requirement                  | Version           |
+| ---------------------------- | ----------------- |
+| Python                       | 3.10+             |
+| pip3                         | latest            |
+| [Ollama](https://ollama.com) | latest            |
+| llama3.2 model               | pulled via Ollama |
 
 ---
 
@@ -99,20 +99,21 @@ python3 -m pytest test_main.py -v
 
 All 10 tests pass:
 
-| Test | What it covers |
-|---|---|
-| `test_returns_list` | `format_users` always returns a list |
-| `test_correct_count` | Correct number of users filtered |
-| `test_name_format` | Names are in `"First Last"` format |
-| `test_filters_post_2000` | Users born after 2000 are excluded |
-| `test_includes_year_2000_edge_case` | Year 2000 is included (boundary check) |
-| `test_empty_response` | Empty input returns empty list |
-| `test_all_post_2000` | All post-2000 users yields empty result |
-| `test_names_are_strings` | All returned names are non-empty strings |
-| `test_missing_results_key` | `get_users` raises `KeyError` when API response is malformed |
-| `test_full_pipeline` | End-to-end: mocked HTTP → `get_users` → `format_users` |
+| Test                                | What it covers                                               |
+| ----------------------------------- | ------------------------------------------------------------ |
+| `test_returns_list`                 | `format_users` always returns a list                         |
+| `test_correct_count`                | Correct number of users filtered                             |
+| `test_name_format`                  | Names are in `"First Last"` format                           |
+| `test_filters_post_2000`            | Users born after 2000 are excluded                           |
+| `test_includes_year_2000_edge_case` | Year 2000 is included (boundary check)                       |
+| `test_empty_response`               | Empty input returns empty list                               |
+| `test_all_post_2000`                | All post-2000 users yields empty result                      |
+| `test_names_are_strings`            | All returned names are non-empty strings                     |
+| `test_missing_results_key`          | `get_users` raises `KeyError` when API response is malformed |
+| `test_full_pipeline`                | End-to-end: mocked HTTP → `get_users` → `format_users`       |
 
 > ⚠️ Two deprecation warnings appear at test time — these are from upstream libraries, not from this project:
+>
 > - `langchain-community` is being sunset; `DuckDuckGoSearchRun` will need to migrate to a standalone package in a future version.
 > - `create_react_agent` has moved from `langgraph.prebuilt` in LangGraph v1.0 — however the import in `langchain.agents` does **not** exist in the currently installed version, so keep using `from langgraph.prebuilt import create_react_agent` until the standalone package is available.
 
@@ -135,10 +136,10 @@ Public figures get a trophy emoji and full description; private individuals get 
 
 Three strategies are available in `lib/bonus.py`:
 
-| Strategy | Function | Benefit |
-|---|---|---|
-| Async parallel | `run_exercise_5_async` | Cuts total time from `n × delay` to ~1 call duration |
-| LRU cache | `get_best_work_cached` | Skips repeated LLM calls for the same name within a session |
+| Strategy         | Function                   | Benefit                                                       |
+| ---------------- | -------------------------- | ------------------------------------------------------------- |
+| Async parallel   | `run_exercise_5_async`     | Cuts total time from `n × delay` to ~1 call duration          |
+| LRU cache        | `get_best_work_cached`     | Skips repeated LLM calls for the same name within a session   |
 | Retry + back-off | `get_best_work_with_retry` | Retries up to 3× (2s → 4s → 8s) on DuckDuckGo/Ollama failures |
 
 Additional improvements applied in `lib/bonus.py`:
@@ -162,8 +163,8 @@ works = asyncio.run(run_exercise_5_async(users, limit=5))
 
 ### Bonus 3 — Architecture flow
 
-See slide 8 of the accompanying presentation:
-[`code/presentation/feedback/GenAI Engineer Assessment v2.html`](code/presentation/feedback/GenAI%20Engineer%20Assessment%20v2.html)
+See slide 5 of the accompanying presentation:
+[`code/presentation/feedback/GenAI Engineer Assessment v2.pdf`](code/presentation/feedback/GenAI%20Engineer%20Assessment%20v2.pdf)
 (or the exported PDF in the same folder).
 
 High-level flow:
@@ -244,10 +245,12 @@ OPENAI_API_KEY=sk-...
 **Time:** ~90 minutes is sufficient for exercises 1–5. The bonus section (especially async and retry) adds another 20–30 minutes if you implement all parts.
 
 **What went well:**
+
 - The `randomuser.me` API is simple and well-documented.
 - LangChain's `create_react_agent` makes the agentic loop very concise.
 - `tenacity` and `lru_cache` are drop-in improvements with minimal code.
 
 **What required extra care:**
+
 - Preventing LLM hallucination (substituting a famous person for an unknown name) needed both the `NOT_NOTABLE` sentinel in the system prompt and a post-hoc name-match check.
 - DuckDuckGo rate limits make the agent brittle without the retry wrapper.
